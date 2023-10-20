@@ -403,3 +403,118 @@ class Switch {
 
 </details>
 
+<details>
+<summary> <h2>9. 자바의 메모리 영역에 대해 설명하시오.</h2></summary>
+
+자바의 메모리 공간은 크게 Method 영역, Stack 영역, Heap 영역으로 구분되고, 데이터 타입에 따라 할당된다.
+<br>
+- 메소드(스태틱) 영역 : 전역변수와 static 변수를 저장하며, Method 영역은 프로그램의 시작부터 종료까지 메모리에 남아있다.
+<br>
+- 스택(Stack) 영역 : 스레드 별 지역변수와 매개변수 데이터 값이 저장되는 공간이며, 메소드가 호출될 때 메모리에 할당되고 종료되면 메모리가 해제된다. LIFO(Last In First Out) 구조를 갖고 변수에 새로운 데이터가 할당되면 이전 데이터는 지워진다.
+<br>
+- 힙(Heap)영역 : new 키워드로 생성되는 객체(인스턴스), 배열 등이 Heap 영역에 저장되며, 가비지 컬렉션에 의해 메모리가 관리되어 진다.
+<br>
+<br>
+<h5>각 메모리 영역이 할당되는 시점은?</h5>
+<br>
+- 메소드 영역 : JVM이 동작해서 클래스가 로딩될 때 생성<br>
+- 스택 영역 : 컴파일 타임 시 할당<br>
+- 힙 영역 : 런타임시 할당<br>
+
+
+</details>
+
+<details>
+<summary> <h2>10. VO vs DTO vs DAO</h2></summary>
+
+- VO(Value Object) : 값 오브젝트로써 값을 위해 쓰인다. Read-Only의 특징을 가진다.<br> 
+- DTO(Data Transfer Object) : 순수한 데이터 객체로써 속성과 그 속성에 접근하기 위한 getter, setter 메소드만 가진 클래스
+<br>
+- DAO(Data Access Object) : DB의 data에 접근하기 위한 객체로 실제 DB에 접근하는 객체
+<br>
+</details>
+
+
+<details>
+<summary> <h2>11. 단방향, 양방향 바인딩에 대해서 설명하시오</h2></summary>
+
+- 데이터 바인딩 : 두 데이터 혹은 정보의 소스를 일치시키는 기법으로, 화면에 보이는 데이터와 브라우저 메모리에 있는 데이터(여러 개의 자바스크립트 객체)를 일치시키는 것을 말함
+<br>
+<br>
+양방향 데이터 바인딩<br>
+▶ 장점 : 코드의 사용면에서 코드량을 크게 줄여줌<br>
+▷ 단점 : 변화에 따라 DOM 객체 전체를 렌더링해주거나 데이터를 바꿔주므로, 성능이 감소되는 경우가 있음<br>
+<br>
+단방향 데이터 바인딩<br>
+▶ 장점 : 데이터 변화에 따른 성능 저하 없이 DOM 객체 갱신 가능,<br>
+데이터 흐름이 단방향(부모 -> 하위 컴포넌트)이라, 코드를 이해하기 쉽고 데이터 추적과 디버깅이 쉬움<br>
+▷ 단점 :  변화를 감지하고 화면을 업데이트 하는 코드를 매번 작성해야 함<br>
+
+</details>
+
+<details>
+<summary> <h2>12. Code spliting에 대해서 설명하시오</h2></summary>
+
+하나의 번들 파일을 여러 개의 번들 파일로 나누어 더 빠른 속도로 화면을 로드하기 위함
+
+</details>
+
+<details>
+<summary> <h2>13. AOP(Aspect Oriented Programming)에 대해서 설명하시오</h2></summary>
+
+프로그램 내의 핵심 비즈니스 로직에서 공통적으로 들어가야 될 코드를 부가 기능 로직으로 분리하여 구현하는 것을 AOP라고 한다.
+<br>
+예를 들어 컨트롤러 (get, post)연결에서 IP값을 받고 싶을 때 일반적으로 비즈니스 로직을 구현한다면 IP를 호출하는 함수를 모든 비즈니스 로직에 넣어야 하지만 AOP 방식을 사용하면 부가기능 영역에 IP를 호출하는 함수를 넣으면 모든 연결에서 IP를 가져올 수 있다.
+
+
+</details>
+
+
+<details>
+<summary> <h2>14. Connection Pool에 대해서 설명하시오</h2></summary>
+
+<h5>핵심 키워드 : WAS, DB 연결 객체, Pool</h5>
+<br>
+<br>
+WAS가 실행되면서 DB와 연결해놓은 객체들을 pool에 저장시켜놓고 필요할 때 가져다 쓰는 방식을 말함
+<br>
+<br>
+<h5>Web Server VS WAS/Web Contatiner </h5><br>
+- Web Server :  Http 프로토콜을 기반으로 클라이언트가 웹 브라우저에서 어떠한 요청을 하면 그 요청을 받아 <h5>정적 컨텐츠</h5>를 제공하는 서버.
+<br>
+<br>
+- Web Container : <h5>동적인 웹 애플리케이션</h5>을 실행하고 관리하는 환경
+<br>
+<br>
+- WAS(Web Application Server)/Web Container :  DB 조회 or 다양한 로직 처리를 요구하는 <h5>동적 컨텐츠</h5>를 제공하기 위해 만들어진 Application 서버
+(정적인 리소스 역시 처리할 수 있음 )
+<br>
+
+<br>
+WAS에서 웹서버의 기능까지 모두 수행하면 안되는 이유<br>
+1. 서버 부하 방지<br>
+정적 컨텐츠까지 WAS가 처리한다면 부하가 커지게 되고, 수행 속도가 느려짐<br>
+2. 보안 강화<br>
+SSL에 대한 암호화, 복호화 처리에 웹 서버를 사용 가능<br>
+3. 여러 대의 WAS 연결 가능<br>
+로드 밸런싱을 위해 웹 서버를 사용할 수 있다. 여러 개의 서버를 사용하는 대용량 웹 어플리케이션의 경우 웹 서버와 WAS를 분리하여 무중단 운영을 위한 장애 극복에 쉽게 대응할 수 있다.<br>
+4. 여러 웹 어플리케이션 서비스 가능<br>
+하나의 서버에서 PHP, JAVA 어플리케이션을 함께 사용할 수 있다.<br>
+
+
+
+
+</details>
+
+
+<details>
+<summary> <h2>15. DDL, DML, DCL에 대해서 설명하시오 </h2></summary>
+
+DDL(Defination 정의) : CREATE, ALTER, DROP, TRUNCATE <br>
+DML(Manipulation 조작) : SELECT, INSERT, UPDATE, DELETE <br>
+DCL(Control 통제) : GRANT,  REVOKE <br>
+ 
+</details>
+
+
+
