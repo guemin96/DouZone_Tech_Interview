@@ -93,7 +93,7 @@ JAVA 클래스 파일(.java) -> 자바 컴파일러 -> 자바 바이트 코드(.
 <details>
 <summary> <h2>8. 객체지향의 설계 원칙(SOLID)</h2></summary>
 
-사용 이유 : SOLID 객체 지향 원칙을 적용하면 코드를 확장하고 유지 보수 관리하기가 더 쉬워지며, 불필요한 복잡성을 제거해 리팩토링에 소요되는 시간을 줄임으로써 프로젝트 새발의 생산성을 높일 수 있다.
+사용 이유 : SOLID 객체 지향 원칙을 적용하면 코드를 확장하고 유지 보수 관리하기가 더 쉬워지며, 불필요한 복잡성을 제거해 리팩토링에 소요되는 시간을 줄임으로써 프로젝트 개발의 생산성을 높일 수 있다.
 <br>
 <h5>1. SRP - 단일 책임 원칙 : 한 클래스는 하나의 책임만 가져야 한다.</h5>
 <br>
@@ -149,7 +149,257 @@ public class OrderNotifier {
 ```
 
 <br>
-<h5>2. OCP - 개방 폐쇄 원칙 : 확장에는 열려있고, 수정에는 닫혀있어야 한다.</h5>
+<h5>2. OCP(Open-Closed Principle) - 개방 폐쇄 원칙 : 확장에는 열려있고, 수정에는 닫혀있어야 한다.</h5>
+<br>
+방법
+<br>
+추상화와 다형성 활용 : 추상 클래스와 인터페이스를 사용하여 확장 가능한 코드를 작성
+<br>
+디자인 패턴 사용 : OCP를 준수하는 설계 패턴을 제공함
+<br>
+의존성 주입 : 의존성 주입을 통해 외부에서 객체의 의존성을 주입받게 함으로써 새로운 구현을 추가하거나 변경할 때 기존 코드를 수정하지 않고도 확장 가능한 코드를 작성할 수 있다.
+
+```
+interface Shape {
+    void draw();
+}
+
+class Circle implements Shape {
+    void draw() {
+        // 원을 그리는 코드
+    }
+}
+
+class Rectangle implements Shape {
+    void draw() {
+        // 사각형을 그리는 코드
+    }
+}
+
+class Triangle implements Shape {
+    void draw() {
+        // 삼각형을 그리는 코드
+    }
+}
+
+// 클라이언트 코드
+public class DrawingApp {
+    public void drawShapes() {
+        List<Shape> shapes = new ArrayList<>(); // 인터페이스를 생성하여 draw라는 기능만 가지도록 하게 하고 클래스를 추가하여 확장하도록 설계해놓음
+        shapes.add(new Circle());
+        shapes.add(new Rectangle());
+        shapes.add(new Triangle());
+        
+        for (Shape shape : shapes) {
+            shape.draw();
+        }
+    }
+}
+```
+
+<h5>3. LSP(Liskov Substitution Principle) - 리스코프 치환 원칙 : 하위 타입은 항상 상위 타입을 대체 할 수 있어야 한다.</h5>
+
+<br>
+잘못된 예제
+
+```
+class Bird {
+    void fly() {
+        System.out.println("새가 날아갑니다.");
+    }
+}
+
+class Ostrich extends Bird {
+    void fly() {
+        throw new UnsupportedOperationException("타조는 날지 않습니다.");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Bird bird = new Ostrich();
+        bird.fly();
+    }
+}
+
+```
+
+Ostrich는 Bird의 서브타입이지만 fly 메서드의 동작이 슈퍼타입(Bird)에서 기대되는 동작과 다름 
+<br>
+-> 'Bird'에서는 '새가 날아갑니다'라는 말을 출력하지만 Ostrich에서는 예외를 던지면서 다른 동작을 수행함
+
+
+<br>
+올바른 예시
+
+```
+class Shape {
+    int area() {
+        return 0;
+    }
+}
+
+class Rectangle extends Shape {
+    int width;
+    int height;
+
+    int area() {
+        return width * height;
+    }
+}
+
+```
+
+```
+
+void printArea(Shape shape) {
+    int area = shape.area();
+    System.out.println("넓이: " + area);
+}
+
+public static void main(String[] args) {
+    Shape shape = new Shape();
+    Rectangle rectangle = new Rectangle();
+    
+    printArea(shape);      // 결과: "넓이: 0"
+    printArea(rectangle);  // 결과: "넓이: (직사각형의 넓이)"
+}
+
+```
+
+<br>
+
+<h5>4. ISP(Interface Segregation Principle) - 인터페이스 분리 원칙 : 한 클래스는 자신이 사용하지 않는 메서드에 의존해서는 안 되며, 인터페이스는 그 구현체들에게 필요한 메서드만을 제공해야 한다. </h5>
+
+<br>
+잘못된 예
+
+```
+interface Worker {
+    void work();
+    void eat();
+}
+
+```
+
+```
+
+class SuperWorker implements Worker {
+    public void work() {
+        // 일을 수행하는 코드
+    }
+
+    public void eat() {
+        // 점심 식사를 하는 코드
+    }
+}
+
+```
+
+
+
+올바른 예
+
+<br>
+
+```
+
+interface Workable {
+    void work();
+}
+
+interface Feedable {
+    void eat();
+}
+
+class SuperWorker implements Workable, Feedable {
+    public void work() {
+        // 일을 수행하는 코드
+    }
+
+    public void eat() {
+        // 점심 식사를 하는 코드
+    }
+}
+
+class RegularWorker implements Workable {
+    public void work() {
+        // 일을 수행하는 코드
+    }
+}
+
+
+
+```
+
+
+<br>
+
+
+
+
+<h5>5. DIP(Dependency Inversion Principle) - 의존 관계 원칙 : 구체적인 클래스보다 상위 클래스, 인터페이스, 추상클래스와 같이 변하지 않을 가능성이 높은 클래스와 관계를 맺어라</h5>
+
+<br>
+잘못된 예
+
+```
+class Bulb {
+    void turnOn() {
+        // 전구를 켜는 코드
+    }
+}
+
+class Switch {
+    private Bulb bulb;
+
+    // Switch 클래스가 Bulb 클래스에 직접 의존하고 있음
+    Switch() {
+        this.bulb = new Bulb();
+    }
+
+    void operate() {
+        bulb.turnOn();
+    }
+}
+
+
+```
+<br>
+올바른 예
+<br>
+
+```
+interface Switchable {
+    void turnOn();
+}
+
+class Bulb implements Switchable {
+    public void turnOn() {
+        // 전구를 켜는 코드
+    }
+}
+
+class Fan implements Switchable {
+    public void turnOn() {
+        // 선풍기를 켜는 코드
+    }
+}
+
+class Switch {
+    private Switchable device;
+
+    // Switchable이라는 인터페이스(추상)에 의존하여 이 인터페이스를 구현한 Bulb와 Fan을 사용할 수 있음 
+    Switch(Switchable device) {
+        this.device = device;
+    }
+
+    void operate() {
+        device.turnOn();
+    }
+}
+```
+
 
 </details>
 
