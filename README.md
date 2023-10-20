@@ -473,18 +473,15 @@ class Switch {
 <details>
 <summary> <h2>14. Connection Pool에 대해서 설명하시오</h2></summary>
 
-<h5>핵심 키워드 : WAS, DB 연결 객체, Pool</h5>
-<br>
+<h4>핵심 키워드 : WAS, DB 연결 객체, Pool</h4>
 <br>
 WAS가 실행되면서 DB와 연결해놓은 객체들을 pool에 저장시켜놓고 필요할 때 가져다 쓰는 방식을 말함
 <br>
 <br>
-<h5>Web Server VS WAS/Web Contatiner </h5><br>
+<h4>Web Server VS WAS/Web Contatiner </h4><br>
 - Web Server :  Http 프로토콜을 기반으로 클라이언트가 웹 브라우저에서 어떠한 요청을 하면 그 요청을 받아 <b>정적 컨텐츠</b>를 제공하는 서버.
 <br>
-<br>
-- Web Container : <b>동적인 웹 애플리케이션</b>을 실행하고 관리하는 환경
-<br>
+
 <br>
 - WAS(Web Application Server)/Web Container :  DB 조회 or 다양한 로직 처리를 요구하는 <b>동적 컨텐츠</b>를 제공하기 위해 만들어진 Application 서버
 (정적인 리소스 역시 처리할 수 있음 )
