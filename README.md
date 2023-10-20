@@ -480,13 +480,13 @@ WAS가 실행되면서 DB와 연결해놓은 객체들을 pool에 저장시켜�
 <br>
 <br>
 <h5>Web Server VS WAS/Web Contatiner </h5><br>
-- Web Server :  Http 프로토콜을 기반으로 클라이언트가 웹 브라우저에서 어떠한 요청을 하면 그 요청을 받아 <h5>정적 컨텐츠</h5>를 제공하는 서버.
+- Web Server :  Http 프로토콜을 기반으로 클라이언트가 웹 브라우저에서 어떠한 요청을 하면 그 요청을 받아 **정적 컨텐츠**를 제공하는 서버.
 <br>
 <br>
-- Web Container : <h5>동적인 웹 애플리케이션</h5>을 실행하고 관리하는 환경
+- Web Container : **동적인 웹 애플리케이션**을 실행하고 관리하는 환경
 <br>
 <br>
-- WAS(Web Application Server)/Web Container :  DB 조회 or 다양한 로직 처리를 요구하는 <h5>동적 컨텐츠</h5>를 제공하기 위해 만들어진 Application 서버
+- WAS(Web Application Server)/Web Container :  DB 조회 or 다양한 로직 처리를 요구하는 **동적 컨텐츠**를 제공하기 위해 만들어진 Application 서버
 (정적인 리소스 역시 처리할 수 있음 )
 <br>
 
