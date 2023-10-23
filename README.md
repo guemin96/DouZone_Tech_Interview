@@ -513,5 +513,13 @@ DCL(Control 통제) : GRANT,  REVOKE <br>
  
 </details>
 
+<details>
+<summary> <h2>16. DBMS에 대해서 설명하시오 </h2></summary>
 
+DataBase Management System => 데이터에 관한 정보를 가능한 한 효율적이고 효과적으로 구성, 복원 및 검색할 수 있도록 만든 응용 프로그램 모음<br>
+
+* RDBMS(관계형) -> oracle, mysql, mssql과 같이 테이블을 만들어서 속성에 따라 관리하는 DB를 말한다.
+* noSql(비관계형) -> JSON 데이터 형식(key-value)으로 데이터를 관리하는 DB
+
+</details>
 
